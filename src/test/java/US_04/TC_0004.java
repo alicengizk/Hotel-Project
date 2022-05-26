@@ -1,5 +1,7 @@
 package US_04;
 
+import org.junit.Test;
+import org.openqa.selenium.By;
 import utilities.TestBase;
 
 public class TC_0004 extends TestBase {
@@ -25,4 +27,24 @@ public class TC_0004 extends TestBase {
     "HotelRoom was inserted successfully" yazısının görünürlüğü test edilmeli
     "OK" butonuna tıklayın ve otel listesini tıklayın
      */
+
+    @Test
+    public void test04() {
+        anasayfaGiris();
+        driver.findElement(By.xpath("//a[@href='/Account/Logon']")).click();
+        adminGirisi();
+        driver.findElement(By.xpath("//*[text()='Hotel Management']")).click();
+        driver.findElement(By.xpath("//a[@href='/admin/HotelAdmin']")).click();
+        driver.findElement(By.xpath("//span[@class='hidden-480']")).click();
+        driver.findElement(By.id("Code")).sendKeys("Otl123");
+        driver.findElement(By.id("Name")).sendKeys("Alice");
+        driver.findElement(By.id("Address")).sendKeys("Savaron'un Arkasi");
+        driver.findElement(By.id("Phone")).sendKeys("666 6 666");
+        driver.findElement(By.id("Email")).sendKeys("mailimsi@mailimsiz.com");
+        driver.findElement(By.xpath("//select[@id='IDGroup']/option[@value='1']")).click();
+        driver.findElement(By.id("btnSubmit")).click();
+        driver.findElement(By.xpath("//*[text()='Hotel was inserted successfully']")).isDisplayed();
+        driver.findElement(By.xpath("//button[@data-bb-handler='ok']")).click();
+        driver.findElement(By.xpath("//a[@href='/admin/HotelAdmin'][1]")).click();
+    }
 }

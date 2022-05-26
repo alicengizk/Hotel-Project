@@ -1,5 +1,9 @@
 package US_03;
 
+import com.github.javafaker.Faker;
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.By;
 import utilities.TestBase;
 
 public class TC_0004 extends TestBase {
@@ -24,4 +28,42 @@ public class TC_0004 extends TestBase {
     Birth Date kısmındaki date inputun görünürlüğü kontrol edilmeli ve doğum tarihi seçilmeli
     Save buttonunun olup olmadığı kontrol edilmeli ve tıklanmalı
      */
+
+    @Test
+    public void test04() {
+        Faker faker = new Faker();
+        anasayfaGiris();
+        driver.findElement(By.xpath("//a[@href='/Account/Logon']")).click();
+        driver.findElement(By.xpath("//span[@class='btn btn-primary py-3 px-5']")).click();
+        String expectedURL = "https://qa-environment.concorthotel.com/Account/Register";
+        String actualURL = driver.getCurrentUrl();
+        Assert.assertEquals(expectedURL, actualURL);
+        driver.findElement(By.id("UserName")).isDisplayed();
+        driver.findElement(By.id("UserName")).sendKeys(faker.name().username());
+        driver.findElement(By.id("Password")).isDisplayed();
+        driver.findElement(By.id("Password")).sendKeys(faker.internet().password());
+        driver.findElement(By.id("Email")).isDisplayed();
+        driver.findElement(By.id("Email")).sendKeys(faker.internet().emailAddress());
+        driver.findElement(By.id("NameSurname")).sendKeys(faker.name().name(), " ", faker.name().lastName());
+        driver.findElement(By.id("PhoneNo")).isDisplayed();
+        driver.findElement(By.id("PhoneNo")).sendKeys(faker.phoneNumber().phoneNumber());
+        driver.findElement(By.id("SSN")).isDisplayed();
+        driver.findElement(By.id("SSN")).sendKeys("111111111");
+        driver.findElement(By.id("DrivingLicense")).isDisplayed();
+        driver.findElement(By.id("DrivingLicense")).sendKeys("1111111111");
+        driver.findElement(By.id("IDCountry")).isDisplayed();
+        driver.findElement(By.xpath("//select[@id='IDCountry']//option[@value='251']")).click();
+        driver.findElement(By.id("IDState")).isDisplayed();
+        driver.findElement(By.xpath("//select[@id='IDState']//option[@value='269']")).click();
+        driver.findElement(By.id("Address")).isDisplayed();
+        driver.findElement(By.id("Address")).sendKeys(faker.address().fullAddress());
+        driver.findElement(By.id("WorkingSector")).isDisplayed();
+        driver.findElement(By.id("WorkingSector")).sendKeys(faker.job().field());
+        driver.findElement(By.id("BirthDate")).isDisplayed();
+        driver.findElement(By.id("BirthDate")).sendKeys("6/3/1982");
+        driver.findElement(By.id("btnSubmit")).isDisplayed();
+        driver.findElement(By.id("btnSubmit")).click();
+
+    }
+
 }

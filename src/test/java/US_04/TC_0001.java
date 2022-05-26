@@ -1,5 +1,7 @@
 package US_04;
 
+import org.junit.Test;
+import org.openqa.selenium.By;
 import utilities.TestBase;
 
 public class TC_0001 extends TestBase {
@@ -15,4 +17,14 @@ public class TC_0001 extends TestBase {
     "Hotel List" menüsüne tıklayın
     "Add Hotel" Buttonuna tıklayın
      */
+
+    @Test
+    public void test04() {
+        anasayfaGiris();
+        driver.findElement(By.xpath("//a[@href='/Account/Logon']")).click();
+        adminGirisi();
+        driver.findElement(By.xpath("//*[text()='Hotel Management']")).click();
+        driver.findElement(By.xpath("//a[@href='/admin/HotelAdmin']")).click();
+        driver.findElement(By.xpath("//span[@class='hidden-480']")).click();
+    }
 }

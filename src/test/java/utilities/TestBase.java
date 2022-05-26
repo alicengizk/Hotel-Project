@@ -31,4 +31,10 @@ public abstract class TestBase {
         driver.findElement(By.id("details-button")).click();
         driver.findElement(By.id("proceed-link")).click();
     }
+
+    public void adminGirisi(){
+        driver.findElement(By.id("UserName")).sendKeys("Manager");
+        driver.findElement(By.id("Password")).sendKeys("Manager1!");
+        driver.findElement(By.id("btnSubmit")).click();
+    }
 }
