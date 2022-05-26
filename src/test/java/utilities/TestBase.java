@@ -3,6 +3,7 @@ package utilities;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -23,5 +24,11 @@ public abstract class TestBase {
     public void tearDown(){
 
         driver.close();
+    }
+
+    public void anasayfaGiris(){
+        driver.get("https://qa-environment.concorthotel.com");
+        driver.findElement(By.id("details-button")).click();
+        driver.findElement(By.id("proceed-link")).click();
     }
 }
